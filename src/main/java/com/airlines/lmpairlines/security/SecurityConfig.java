@@ -72,7 +72,7 @@ public class SecurityConfig {
             public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
                 Customer customer=customerService.findCustomerByUsername(username);
-                CustomerDetails customerDetails=new CustomerDetails(customer.getCustomerId(),customer.getFirstName(),customer.getLastName(),customer.getUsername(),customer.getPassword(),customer.getAddress(),customer.getCountry(),customer.getCity(),customer.getRole().getName());
+                CustomerDetails customerDetails=new CustomerDetails(customer.getCustomerId(),customer.getFirstName(),customer.getLastName(),customer.getUsername(),customer.getPassword(),customer.getEmail(),customer.getAddress(),customer.getCountry(),customer.getCity(),customer.getRole().getName());
                 if(customer!=null)
                     return customerDetails;
                 else throw new UsernameNotFoundException("User not found!");

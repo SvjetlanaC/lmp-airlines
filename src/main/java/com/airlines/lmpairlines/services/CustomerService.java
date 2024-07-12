@@ -10,7 +10,7 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 
 public interface CustomerService {
 
-    Customer insert(RegistrationDTO registrationDTO) throws UsernameExistsException, NotFoundException, MessagingException;
+    Customer insert(RegistrationDTO registrationDTO) throws UsernameExistsException, NotFoundException;
     Customer findCustomerByUsername(String username);
     Customer findCustomerById(Integer id) throws NotFoundException;
 }

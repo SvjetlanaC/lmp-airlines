@@ -31,7 +31,7 @@ public class CustomerServiceImpl implements CustomerService {
     private EntityManager entityManager;
 
     @Override
-    public Customer insert(RegistrationDTO registrationDTO) throws UsernameExistsException, NotFoundException, MessagingException {
+    public Customer insert(RegistrationDTO registrationDTO) throws UsernameExistsException, NotFoundException {
 
 
         Customer costumerEntity=customerRepository.findCustomerByUsername(registrationDTO.getUsername());
@@ -54,13 +54,20 @@ public class CustomerServiceImpl implements CustomerService {
         customer.setAddress(registrationDTO.getAddress());
         customer.setCity(registrationDTO.getCity());
         customer.setCountry(registrationDTO.getCountry());
+        customer.setEmail(registrationDTO.getEmail());
         customer=customerRepository.saveAndFlush(customer);
         entityManager.refresh(customer);
 
-        if(findCustomerById(customer.getCustomerId())!=null)
-            emailService.sendEmail("svjetlana.c13@gmail.com",customer.getUsername());
+        Customer newCustomer=findCustomerById(customer.getCustomerId());
+        if(newCustomer!=null) {
+            try {
+                emailService.sendEmail(customer.getEmail(),customer.getUsername());
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            }
+        }
 
-        return findCustomerById(customer.getCustomerId());
+        return newCustomer;
     }
 
     @Override

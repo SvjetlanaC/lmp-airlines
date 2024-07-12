@@ -26,6 +26,9 @@ public class Customer {
     @Column(name = "password")
     private String password;
     @Basic
+    @Column(name="email")
+    private String email;
+    @Basic
     @Column(name = "address")
     private String address;
     @Basic

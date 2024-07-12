@@ -40,11 +40,10 @@ public class CustomerController {
             return ResponseEntity.ok(jwtUtils.generateToken(user));
         }
         return ResponseEntity.status(401).body(null);
-//        return ResponseEntity.ok(jwtUtils.generateToken(user));
     }
 
     @PostMapping("/register")
-    public Customer register(@RequestBody RegistrationDTO registrationDTO) throws NotFoundException, UsernameExistsException, MessagingException {
+    public Customer register(@RequestBody RegistrationDTO registrationDTO) throws NotFoundException, UsernameExistsException {
 
         return customerService.insert(registrationDTO);
     }

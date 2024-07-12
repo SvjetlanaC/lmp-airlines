@@ -15,6 +15,7 @@ public class CustomerDetails implements UserDetails {
     private String lastName;
     private String username;
     private String password;
+    private String email;
     private String address;
     private String country;
     private String city;
